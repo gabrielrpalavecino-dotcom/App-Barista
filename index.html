@@ -276,7 +276,38 @@ color:var(--gold);
     font-weight:700;
     color:var(--gold);
 }
-    
+    #notasSugeridas{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:10px;
+}
+
+#notasSeleccionadas{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:12px;
+}
+
+.chip{
+    padding:10px 14px;
+    border-radius:999px;
+    background:#374151;
+    color:white;
+    cursor:pointer;
+    font-size:14px;
+    transition:.2s;
+}
+
+.chip:hover{
+    transform:scale(1.05);
+}
+
+.chip-selected{
+    background:#c58b45;
+    color:white;
+}
 </style>
 </head>
     
@@ -448,20 +479,22 @@ color:var(--gold);
         </div>
 
 <div>
-    <label>👃 Nota Principal</label>
-    <select id="nota1" class="nota-select"></select>
-</div>
-
 <div>
-    <label>👃 Nota Secundaria</label>
-    <select id="nota2" class="nota-select"></select>
-</div>
 
-<div>
-    <label>👃 Retrogusto</label>
-    <select id="nota3" class="nota-select"></select>
-</div>       
-        
+    <label>👃 Notas Sensoriales</label>
+
+    <input
+        type="text"
+        id="buscarNota"
+        placeholder="Buscar chocolate, fresa, jazmín..."
+        autocomplete="off">
+
+    <div id="notasSugeridas"></div>
+
+    <div id="notasSeleccionadas"></div>
+
+</div>
+    
     </div>
 
     <br>
@@ -485,6 +518,110 @@ color:var(--gold);
 </div>
 
 <script>
+
+    let notasElegidas = [];
+
+const buscador =
+document.getElementById("buscarNota");
+
+const sugeridas =
+document.getElementById("notasSugeridas");
+
+const seleccionadas =
+document.getElementById("notasSeleccionadas");
+
+buscador.addEventListener(
+"input",
+mostrarSugerencias
+);
+
+    function agregarNota(nota){
+
+    if(
+        notasElegidas.includes(nota)
+    ) return;
+
+    if(
+        notasElegidas.length >= 3
+    ){
+        alert(
+        "Máximo 3 notas sensoriales"
+        );
+        return;
+    }
+
+    notasElegidas.push(nota);
+
+    renderNotas();
+}
+   function renderNotas(){
+
+    seleccionadas.innerHTML="";
+
+    notasElegidas.forEach(nota=>{
+
+        const chip =
+        document.createElement("div");
+
+        chip.className=
+        "chip chip-selected";
+
+        chip.innerHTML=
+        nota + " ✕";
+
+        chip.onclick=()=>{
+
+            notasElegidas =
+            notasElegidas.filter(
+            n=>n!==nota
+            );
+
+            renderNotas();
+
+        };
+
+        seleccionadas
+        .appendChild(chip);
+
+    });
+
+} 
+function mostrarSugerencias(){
+
+    const texto =
+    buscador.value.toLowerCase();
+
+    sugeridas.innerHTML="";
+
+    if(texto.length<2) return;
+
+    notasCafe
+    .filter(nota =>
+        nota.toLowerCase()
+        .includes(texto)
+    )
+    .slice(0,10)
+    .forEach(nota=>{
+
+        const chip =
+        document.createElement("div");
+
+        chip.className="chip";
+
+        chip.textContent=nota;
+
+        chip.onclick=()=>{
+
+            agregarNota(nota);
+
+        };
+
+        sugeridas.appendChild(
+        chip);
+
+    });
+
+}
 
 if(
     nota1 &&
@@ -942,7 +1079,9 @@ actualizarGrafico();
         <p><strong>${accion}</strong></p>
 
         <small>${hora}</small>
-
+        
+const notas =
+notasElegidas.join(", ");
 function crearGrafico(){
 
     const ctx =
@@ -1056,16 +1195,11 @@ function actualizarGrafico(){
 
     }
         
-<p>👃 Principal:
-<b>${nota1 || "-"}</b></p>
-
-<p>👃 Secundaria:
-<b>${nota2 || "-"}</b></p>
-
-<p>👅 Retrogusto:
-<b>${nota3 || "-"}</b></p>
-};
-
+<p>
+👃 Notas:
+<b>${notas || "-"}</b>
+</p>
+     
 </script>
 
 </body>
