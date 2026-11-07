@@ -242,7 +242,9 @@ color:var(--gold);
 
 </style>
 </head>
-
+    
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
 <body>
 
 <div class="header">
@@ -399,7 +401,16 @@ color:var(--gold);
 </div>
 
 <script>
-
+    
+const beep =
+new Audio(
+"https://actions.google.com/sounds/v1/alarms/beep_short.ogg"
+);
+    
+let tiemposExtraccion = [];
+let chart;
+let aviso28s = false;
+    
 let cronometroInterval;
 let inicio;
 let corriendo=false;
@@ -444,6 +455,19 @@ function startCrono(){
 
     cronometroInterval=setInterval(()=>{
 
+if(
+segundos >= 28 &&
+!aviso28s
+){
+
+    aviso28s = true;
+
+    beep.play();
+
+    navigator.vibrate?.(300);
+
+}
+        
         let segundos=
         (Date.now()-inicio)/1000;
 
@@ -454,7 +478,7 @@ function startCrono(){
 
     },100);
 }
-
+aviso28s = false;
 function stopCrono(){
 
     clearInterval(cronometroInterval);
@@ -494,6 +518,15 @@ function resetCrono(){
 
 function registrar(){
 
+tiemposExtraccion.push(tiempo);
+
+localStorage.setItem(
+"espresso_tiempos",
+JSON.stringify(tiemposExtraccion)
+);
+
+actualizarGrafico();
+    
     let cafe=
     document.getElementById("cafe").value;
 
@@ -599,6 +632,60 @@ function registrar(){
 
         <small>${hora}</small>
 
+function crearGrafico(){
+
+    const ctx =
+    document.getElementById(
+    "consistencyChart"
+    );
+
+    chart = new Chart(ctx,{
+
+        type:'line',
+
+        data:{
+            labels:[],
+            datasets:[{
+                label:'Tiempo Extracción (s)',
+                data:[],
+                borderColor:'#c58b45',
+                backgroundColor:'rgba(197,139,69,.25)',
+                tension:.35,
+                fill:true
+            }]
+        },
+
+        options:{
+            responsive:true,
+
+            plugins:{
+                legend:{
+                    labels:{
+                        color:'white'
+                    }
+                }
+            },
+
+            scales:{
+                x:{
+                    ticks:{
+                        color:'#9ca3af'
+                    }
+                },
+                y:{
+                    ticks:{
+                        color:'#9ca3af'
+                    },
+                    min:15,
+                    max:40
+                }
+            }
+        }
+
+    });
+
+}
+        
     </div>
     `;
 
@@ -617,6 +704,35 @@ function registrar(){
 
 window.onload=function(){
 
+    <div class="card">
+
+    <h2>📈 Consistencia de Extracción</h2>
+
+    <canvas id="consistencyChart"></canvas>
+crearGrafico();
+
+const guardados =
+JSON.parse(
+localStorage.getItem("espresso_tiempos")
+) || [];
+
+tiemposExtraccion = guardados;
+
+function actualizarGrafico(){
+
+    if(!chart) return;
+
+    chart.data.labels =
+    tiemposExtraccion.map((_,i)=>`#${i+1}`);
+
+    chart.data.datasets[0].data =
+    tiemposExtraccion;
+
+    chart.update();
+
+}
+    
+</div>
     const historial=
     localStorage.getItem(
     "espresso_historial");
