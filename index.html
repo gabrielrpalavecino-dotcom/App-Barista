@@ -447,6 +447,21 @@ color:var(--gold);
             </select>
         </div>
 
+<div>
+    <label>👃 Nota Principal</label>
+    <select id="nota1" class="nota-select"></select>
+</div>
+
+<div>
+    <label>👃 Nota Secundaria</label>
+    <select id="nota2" class="nota-select"></select>
+</div>
+
+<div>
+    <label>👃 Retrogusto</label>
+    <select id="nota3" class="nota-select"></select>
+</div>       
+        
     </div>
 
     <br>
@@ -470,6 +485,128 @@ color:var(--gold);
 </div>
 
 <script>
+
+if(
+    nota1 &&
+    (nota1 === nota2 || nota1 === nota3)
+){
+    alert("La nota principal está repetida.");
+    return;
+}
+
+if(
+    nota2 &&
+    nota2 === nota3
+){
+    alert("La nota secundaria y el retrogusto no pueden ser iguales.");
+    return;
+}
+    
+    function cargarNotas(){
+
+    const selects = [
+        "nota1",
+        "nota2",
+        "nota3"
+    ];
+
+    selects.forEach(id => {
+
+        const select =
+        document.getElementById(id);
+
+        select.innerHTML =
+        '<option value="">Seleccionar...</option>';
+
+        notasCafe.forEach(nota => {
+
+            const option =
+            document.createElement("option");
+
+            option.value = nota;
+            option.textContent = nota;
+
+            select.appendChild(option);
+
+        });
+
+    });
+
+}
+       const notasCafe = [
+
+"Chocolate Negro",
+"Chocolate con Leche",
+"Cacao",
+"Brownie",
+
+"Avellana",
+"Almendra",
+"Nuez",
+"Cacahuete",
+
+"Caramelo",
+"Miel",
+"Vainilla",
+"Azúcar Moreno",
+"Melaza",
+
+"Fresa",
+"Frambuesa",
+"Cereza",
+"Arándano",
+"Mora",
+"Grosella",
+
+"Naranja",
+"Mandarina",
+"Limón",
+"Lima",
+"Pomelo",
+"Bergamota",
+
+"Mango",
+"Piña",
+"Papaya",
+"Maracuyá",
+"Coco",
+
+"Melocotón",
+"Albaricoque",
+"Ciruela",
+"Nectarina",
+
+"Manzana",
+"Pera",
+"Uva",
+
+"Jazmín",
+"Rosa",
+"Azahar",
+"Lavanda",
+
+"Té Negro",
+"Té Verde",
+"Hierba Fresca",
+"Menta",
+
+"Canela",
+"Cardamomo",
+"Clavo",
+"Nuez Moscada",
+"Pimienta",
+
+"Tabaco",
+"Madera",
+"Tostado",
+
+"Vino Tinto",
+"Vino Blanco",
+"Ron",
+"Licor",          
+"Whisky"
+
+   ];
     
     function actualizarRatio(){
 
@@ -656,7 +793,14 @@ function resetCrono(){
 }
 
 function registrar(){
-    const ratioObjetivo =
+
+let notaSensorial =
+document.getElementById(
+"notaSensorial"
+).value;
+    
+const ratioObjetivo =
+        
 parseFloat(
 document.getElementById(
 "ratioObjetivo"
@@ -870,7 +1014,7 @@ function crearGrafico(){
 }
 
 window.onload=function(){
-
+cargarNotas();
     <div class="card">
 
     <h2>📈 Consistencia de Extracción</h2>
@@ -911,7 +1055,15 @@ function actualizarGrafico(){
         historial;
 
     }
+        
+<p>👃 Principal:
+<b>${nota1 || "-"}</b></p>
 
+<p>👃 Secundaria:
+<b>${nota2 || "-"}</b></p>
+
+<p>👅 Retrogusto:
+<b>${nota3 || "-"}</b></p>
 };
 
 </script>
