@@ -239,14 +239,83 @@ color:var(--gold);
     color:var(--gray);
     margin-top:20px;
 }
+.ratio-slider{
+    width:100%;
+    height:10px;
+    appearance:none;
+    background:#374151;
+    border-radius:20px;
+    margin-top:10px;
+}
 
+.ratio-slider::-webkit-slider-thumb{
+    appearance:none;
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    background:var(--gold);
+    cursor:pointer;
+    border:3px solid white;
+}
+
+.ratio-labels{
+    display:flex;
+    justify-content:space-between;
+    margin-top:8px;
+    font-size:12px;
+    color:var(--gray);
+}
+
+.peso-objetivo{
+    margin-top:12px;
+    padding:12px;
+    border-radius:12px;
+    background:var(--card2);
+    text-align:center;
+    font-size:18px;
+    font-weight:700;
+    color:var(--gold);
+}
+    
 </style>
 </head>
     
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
 <body>
+<div>
 
+</div>
+    <div>
+
+    <label>
+        Ratio Objetivo:
+        <span id="ratioValue">1:2.0</span>
+    </label>
+
+    <input
+        type="range"
+        id="ratioObjetivo"
+        min="1"
+        max="3.5"
+        step="0.1"
+        value="2"
+        oninput="actualizarRatio()"
+        class="ratio-slider"
+    >
+
+    <div class="ratio-labels">
+        <span>1:1</span>
+        <span>1:2</span>
+        <span>1:3.5</span>
+    </div>
+
+    <div id="pesoObjetivo"
+         class="peso-objetivo">
+        Salida objetivo: --
+    </div>
+
+</div>
 <div class="header">
     <div class="logo">☕</div>
     <div class="title">Espresso Calibration Pro</div>
@@ -402,6 +471,47 @@ color:var(--gold);
 
 <script>
     
+    function actualizarRatio(){
+
+    const ratio =
+    parseFloat(
+        document.getElementById(
+            "ratioObjetivo"
+        ).value
+    );
+
+    document.getElementById(
+        "ratioValue"
+    ).innerText =
+    "1:" + ratio.toFixed(1);
+
+    calcularSalidaObjetivo();
+        }
+    function calcularSalidaObjetivo(){
+
+    const dosis =
+    parseFloat(
+        document.getElementById(
+            "dosis"
+        ).value
+    ) || 0;
+
+    const ratio =
+    parseFloat(
+        document.getElementById(
+            "ratioObjetivo"
+        ).value
+    );
+
+    const objetivo =
+    (dosis * ratio).toFixed(1);
+
+    document.getElementById(
+        "pesoObjetivo"
+    ).innerHTML =
+    `🎯 Salida objetivo: ${objetivo} g`;
+
+}
 const beep =
 new Audio(
 "https://actions.google.com/sounds/v1/alarms/beep_short.ogg"
@@ -416,7 +526,9 @@ let inicio;
 let corriendo=false;
 
 function actualizarPreview(){
-
+    
+    calcularSalidaObjetivo();
+    
     let dosis=parseFloat(
     document.getElementById("dosis").value)||0;
 
@@ -500,6 +612,33 @@ function stopCrono(){
 
     actualizarPreview();
 }
+ function actualizarPreview(){
+
+    let dosis =
+    parseFloat(
+    document.getElementById("dosis").value
+    ) || 0;
+
+    let ratioObjetivo =
+    parseFloat(
+    document.getElementById("ratioObjetivo").value
+    ) || 2;
+
+    if(dosis > 0){
+
+        let bebidaObjetivo =
+        (dosis * ratioObjetivo).toFixed(1);
+
+        document.getElementById(
+        "ratioLive"
+        ).innerText =
+        "1:" + ratioObjetivo;
+
+        document.getElementById(
+        "taza"
+        ).placeholder =
+        bebidaObjetivo + " g";
+    }
 
 function resetCrono(){
 
@@ -517,7 +656,35 @@ function resetCrono(){
 }
 
 function registrar(){
+    const ratioObjetivo =
+parseFloat(
+document.getElementById(
+"ratioObjetivo"
+).value
+);
 
+const ratioReal =
+(taza/dosis).toFixed(2);
+
+const diferencia =
+(
+ratioReal - ratioObjetivo
+).toFixed(2);
+let ratioReal =
+(taza / dosis).toFixed(2);
+
+let ratioObjetivo =
+parseFloat(
+document.getElementById(
+"ratioObjetivo"
+).value
+);
+
+let diferencia =
+(
+ratioReal - ratioObjetivo
+).toFixed(2);
+    
 tiemposExtraccion.push(tiempo);
 
 localStorage.setItem(
