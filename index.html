@@ -892,27 +892,7 @@ segundos >= 28 &&
     },100);
 }
 aviso28s = false;
-function stopCrono(){
 
-    clearInterval(cronometroInterval);
-
-    corriendo=false;
-
-    document
-    .getElementById("cronometro")
-    .classList.remove("running");
-
-    let tiempoFinal=parseFloat(
-    document.getElementById(
-    "cronometro").innerText);
-
-    document
-    .getElementById("tiempo")
-    .value=
-    tiempoFinal.toFixed(1);
-
-    actualizarPreview();
-}
  function actualizarPreview(){
 
     let dosis =
@@ -940,7 +920,27 @@ function stopCrono(){
         ).placeholder =
         bebidaObjetivo + " g";
     }
+function stopCrono(){
 
+    clearInterval(cronometroInterval);
+
+    corriendo=false;
+
+    document
+    .getElementById("cronometro")
+    .classList.remove("running");
+
+    let tiempoFinal=parseFloat(
+    document.getElementById(
+    "cronometro").innerText);
+
+    document
+    .getElementById("tiempo")
+    .value=
+    tiempoFinal.toFixed(1);
+
+    actualizarPreview();
+}
 function resetCrono(){
 
     clearInterval(cronometroInterval);
