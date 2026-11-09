@@ -6,361 +6,40 @@
 <title>☕ Espresso Calibration Pro</title>
 <style>
 :root{--bg:#0f1115;--card:#1b1f24;--card2:#252b34;--gold:#c58b45;--green:#22c55e;--orange:#f59e0b;--red:#ef4444;--gray:#9ca3af;--white:#fff}
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,sans-serif}
-body{background:var(--bg);color:var(--white);padding:15px;padding-bottom:120px}
-.header{text-align:center;margin-bottom:20px}.logo{font-size:64px}.title{font-size:30px;font-weight:700}.subtitle{color:var(--gray);margin-top:8px}
-.card{background:var(--card);border-radius:22px;padding:18px;margin-bottom:15px;box-shadow:0 8px 20px rgba(0,0,0,.25)}.card h2{margin-bottom:15px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:var(--card2);border-radius:16px;padding:15px;text-align:center}.stat h3{color:var(--gold);font-size:24px}.stat span{display:block;color:var(--gray);font-size:12px;margin-top:6px}
-.estado{margin-top:15px;text-align:center;padding:18px;border-radius:18px;font-size:20px;font-weight:700}.ok{color:var(--green);border:2px solid var(--green);background:rgba(34,197,94,.1)}.warn{color:var(--orange);border:2px solid var(--orange);background:rgba(245,158,11,.12)}.bad{color:var(--red);border:2px solid var(--red);background:rgba(239,68,68,.12)}
-.grid{display:flex;flex-direction:column;gap:12px}label{display:block;margin-bottom:6px;color:var(--gray);font-size:13px}input,select{width:100%;height:58px;border:none;outline:none;border-radius:14px;padding:0 16px;background:#f3f4f6;color:#111827;font-size:16px}input:focus,select:focus{outline:2px solid var(--gold);outline-offset:2px}
-.btn{width:100%;height:60px;border:none;border-radius:18px;background:var(--gold);color:white;font-size:18px;font-weight:700;cursor:pointer}.crono-card{text-align:center}.cronometro{font-size:68px;font-weight:800;letter-spacing:1px}.cronometro.running{color:var(--gold)}.cronometro.alarm{color:var(--red);animation:alarma-pulso .5s ease-in-out 4 alternate}@keyframes alarma-pulso{to{transform:scale(1.12)}}.alarma-mensaje{min-height:24px;margin-top:4px;color:var(--orange);font-weight:700}
-.crono-buttons{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.start-btn,.stop-btn,.reset-btn{height:55px;border:none;border-radius:14px;color:white;font-weight:700;font-size:16px;cursor:pointer}.start-btn{background:#22c55e}.stop-btn{background:#ef4444}.reset-btn{background:#6b7280}
-.registro{background:var(--card2);padding:15px;border-radius:18px;margin-bottom:12px;border-left:5px solid var(--gold)}.registro h3{margin-bottom:8px}.registro p{margin:5px 0}.registro small{color:var(--gray)}
-.ratio-slider{width:100%;height:10px;appearance:none;background:#374151;border-radius:20px;margin-top:10px;padding:0}.ratio-slider::-webkit-slider-thumb{appearance:none;width:24px;height:24px;border-radius:50%;background:var(--gold);border:3px solid #fff}.ratio-labels{display:flex;justify-content:space-between;color:var(--gray);font-size:12px;margin-top:8px}.peso-objetivo{margin-top:12px;color:var(--gold);font-weight:600}
-#notasSugeridas,#notasSeleccionadas{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.chip{padding:10px 14px;border:0;border-radius:999px;background:#374151;color:white;cursor:pointer;font-size:14px}.chip-selected{background:var(--gold);color:#111827;font-weight:700}
-.footer{text-align:center;color:var(--gray);padding:20px 0 40px;font-size:13px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,sans-serif}body{background:var(--bg);color:var(--white);padding:15px;padding-bottom:120px}.header{text-align:center;margin-bottom:20px}.logo{font-size:64px}.title{font-size:30px;font-weight:700}.subtitle{color:var(--gray);margin-top:8px}.card{background:var(--card);border-radius:22px;padding:18px;margin-bottom:15px;box-shadow:0 8px 20px rgba(0,0,0,.25)}.card h2{margin-bottom:15px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:var(--card2);border-radius:16px;padding:15px;text-align:center}.stat h3{color:var(--gold);font-size:24px}.stat span{display:block;color:var(--gray);font-size:12px;margin-top:6px}.estado{margin-top:15px;text-align:center;padding:18px;border-radius:18px;font-size:20px;font-weight:700}.ok{color:var(--green);border:2px solid var(--green);background:rgba(34,197,94,.1)}.warn{color:var(--orange);border:2px solid var(--orange);background:rgba(245,158,11,.12)}.bad{color:var(--red);border:2px solid var(--red);background:rgba(239,68,68,.12)}
+.grid{display:flex;flex-direction:column;gap:12px}label{display:block;margin-bottom:6px;color:var(--gray);font-size:13px}input,select{width:100%;height:58px;border:0;outline:none;border-radius:14px;padding:0 16px;background:#f3f4f6;color:#111827;font-size:16px}input:focus,select:focus{outline:2px solid var(--gold);outline-offset:2px}.btn{width:100%;height:60px;border:0;border-radius:18px;background:var(--gold);color:white;font-size:18px;font-weight:700;cursor:pointer}
+.crono-card{text-align:center}.cronometro{font-size:68px;font-weight:800;letter-spacing:1px}.cronometro.running{color:var(--gold)}.cronometro.alarm{color:var(--red);animation:alarma .35s ease-in-out 8 alternate}@keyframes alarma{to{transform:scale(1.13);text-shadow:0 0 25px var(--red)}}.alarma-mensaje{min-height:30px;margin:6px 0;color:var(--orange);font-weight:800;font-size:18px}.crono-buttons{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.start-btn,.stop-btn,.reset-btn{height:55px;border:0;border-radius:14px;color:white;font-weight:700;font-size:16px;cursor:pointer}.start-btn{background:#22c55e}.stop-btn{background:#ef4444}.reset-btn{background:#6b7280}
+.registro{background:var(--card2);padding:15px;border-radius:18px;margin-bottom:12px;border-left:5px solid var(--gold)}.registro h3{margin-bottom:8px}.registro p{margin:5px 0}.registro small{color:var(--gray)}.ratio-slider{width:100%;height:10px;appearance:none;background:#374151;border-radius:20px;margin-top:10px;padding:0}.ratio-slider::-webkit-slider-thumb{appearance:none;width:24px;height:24px;border-radius:50%;background:var(--gold);border:3px solid #fff}.ratio-labels{display:flex;justify-content:space-between;color:var(--gray);font-size:12px;margin-top:8px}.peso-objetivo{margin-top:12px;color:var(--gold);font-weight:600}#notasSugeridas,#notasSeleccionadas{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.chip{padding:10px 14px;border:0;border-radius:999px;background:#374151;color:white;cursor:pointer;font-size:14px}.chip-selected{background:var(--gold);color:#111827;font-weight:700}.footer{text-align:center;color:var(--gray);padding:20px 0 40px;font-size:13px}
 </style>
 </head>
 <body>
-<div class="card">
-  <label for="ratioObjetivo">Ratio Objetivo: <span id="ratioValue">1:2.0</span></label>
-  <input type="range" id="ratioObjetivo" min="1" max="3.5" step="0.1" value="2" class="ratio-slider">
-  <div class="ratio-labels"><span>1:1</span><span>1:2</span><span>1:3.5</span></div>
-  <div id="pesoObjetivo" class="peso-objetivo">Salida objetivo: --</div>
-</div>
+<div class="card"><label for="ratioObjetivo">Ratio Objetivo: <span id="ratioValue">1:2.0</span></label><input type="range" id="ratioObjetivo" min="1" max="3.5" step="0.1" value="2" class="ratio-slider"><div class="ratio-labels"><span>1:1</span><span>1:2</span><span>1:3.5</span></div><div id="pesoObjetivo" class="peso-objetivo">Salida objetivo: --</div></div>
 <div class="header"><div class="logo">☕</div><div class="title">Espresso Calibration Pro</div><div class="subtitle">Control profesional de extracción</div></div>
-<div class="card"><div class="stats">
-  <div class="stat"><h3 id="ratioLive">1:0</h3><span>RATIO</span></div>
-  <div class="stat"><h3 id="tiempoLive">0s</h3><span>TIEMPO</span></div>
-  <div class="stat"><h3 id="estadoLive">---</h3><span>SHOT</span></div>
-</div><div id="estado" class="estado">Esperando extracción...</div></div>
-<div class="card crono-card"><h2>⏱️ Cronómetro</h2><div id="cronometro" class="cronometro">00.0</div><div id="alarmaEstado" class="alarma-mensaje" aria-live="polite"></div>
-  <div class="crono-buttons"><button class="start-btn" type="button" onclick="startCrono()">▶ START</button><button class="stop-btn" type="button" onclick="stopCrono()">■ STOP</button><button class="reset-btn" type="button" onclick="resetCrono()">↺ RESET</button></div>
-  <p style="color:var(--gray);margin-top:10px">Alarma sonora de referencia al llegar a 28 segundos. STOP copiará el tiempo al formulario.</p>
-</div>
-<div class="card"><h2>Nueva Extracción</h2><div class="grid">
-  <div><label for="cafe">Café</label><input type="text" id="cafe" placeholder="Colombia, Brasil, Etiopía..."></div>
-  <div><label for="dosis">Dosis (g)</label><input type="number" id="dosis" step="0.1" min="0"></div>
-  <div><label for="taza">Bebida final (g)</label><input type="number" id="taza" step="0.1" min="0"></div>
-  <div><label for="tiempo">Tiempo (s)</label><input type="number" id="tiempo" step="0.1" min="0"></div>
-  <div><label for="temp">Temperatura °C</label><input type="number" id="temp" value="90" step="0.1"></div>
-  <div><label for="molienda">Molienda</label><input type="text" id="molienda" placeholder="5.4"></div>
-  <div><label for="sabor">Sabor</label><select id="sabor"><option>Equilibrado</option><option>Dulce</option><option>Ácido</option><option>Amargo</option><option>Aguado</option></select></div>
-  <div><label for="buscarNota">👃 Notas Sensoriales (máximo 3)</label><input type="text" id="buscarNota" placeholder="Buscar chocolate, fresa, jazmín..." autocomplete="off"><div id="notasSugeridas"></div><div id="notasSeleccionadas"></div></div>
-</div><br><button class="btn" type="button" onclick="registrar()">Guardar Shot</button></div>
-<div class="card"><h2>📋 Historial</h2><div id="historial"></div></div>
-<div class="footer">Krusty Web App - Madrid - 2026</div>
+<div class="card"><div class="stats"><div class="stat"><h3 id="ratioLive">1:0</h3><span>RATIO</span></div><div class="stat"><h3 id="tiempoLive">0s</h3><span>TIEMPO</span></div><div class="stat"><h3 id="estadoLive">---</h3><span>SHOT</span></div></div><div id="estado" class="estado">Esperando extracción...</div></div>
+<div class="card crono-card"><h2>⏱️ Cronómetro</h2><div id="cronometro" class="cronometro">00.0</div><div id="alarmaEstado" class="alarma-mensaje" aria-live="assertive">Alarma de referencia: 28 s</div><div class="crono-buttons"><button class="start-btn" type="button" onclick="startCrono()">▶ START</button><button class="stop-btn" type="button" onclick="stopCrono()">■ STOP</button><button class="reset-btn" type="button" onclick="resetCrono()">↺ RESET</button></div><p style="color:var(--gray);margin-top:10px">Al llegar a 28 s, el cronómetro parpadeará y sonará. STOP copia el tiempo al formulario.</p></div>
+<div class="card"><h2>Nueva Extracción</h2><div class="grid"><div><label for="cafe">Café</label><input type="text" id="cafe" placeholder="Colombia, Brasil, Etiopía..."></div><div><label for="dosis">Dosis (g)</label><input type="number" id="dosis" step="0.1" min="0"></div><div><label for="taza">Bebida final (g)</label><input type="number" id="taza" step="0.1" min="0"></div><div><label for="tiempo">Tiempo (s)</label><input type="number" id="tiempo" step="0.1" min="0"></div><div><label for="temp">Temperatura °C</label><input type="number" id="temp" value="90" step="0.1"></div><div><label for="molienda">Molienda</label><input type="text" id="molienda" placeholder="5.4"></div><div><label for="sabor">Sabor</label><select id="sabor"><option>Equilibrado</option><option>Dulce</option><option>Ácido</option><option>Amargo</option><option>Aguado</option></select></div><div><label for="buscarNota">👃 Notas Sensoriales (máximo 3)</label><input type="text" id="buscarNota" placeholder="Buscar chocolate, fresa, jazmín..." autocomplete="off"><div id="notasSugeridas"></div><div id="notasSeleccionadas"></div></div></div><br><button class="btn" type="button" onclick="registrar()">Guardar Shot</button></div>
+<div class="card"><h2>📋 Historial</h2><div id="historial"></div></div><div class="footer">Krusty Web App - Madrid - 2026</div>
 <script>
 'use strict';
-
-const notasCafe = [
-  'Chocolate Negro','Chocolate con Leche','Cacao','Brownie','Caramelo','Miel','Vainilla','Melaza','Azúcar Moreno',
-  'Avellana','Almendra','Nuez','Pistacho','Fresa','Frambuesa','Cereza','Arándano','Mora','Naranja','Mandarina','Limón','Lima','Pomelo','Bergamota',
-  'Piña','Mango','Papaya','Maracuyá','Coco','Melocotón','Albaricoque','Ciruela','Nectarina','Manzana','Pera','Uva','Jazmín','Rosa','Azahar','Lavanda',
-  'Té Negro','Té Verde','Menta','Hierba Fresca','Canela','Cardamomo','Clavo','Nuez Moscada','Pimienta','Tabaco','Madera','Tostado','Carbón','Vino Tinto','Ron','Whisky','Licor'
-];
-
-let notasElegidas = [];
-let cronometroInterval = null;
-let inicioCrono = 0;
-let corriendo = false;
-let alarmaDisparada = false;
-let audioContext = null;
-
-const $ = (id) => document.getElementById(id);
-
-function actualizarSalidaObjetivo() {
-  const dosis = Number.parseFloat($('dosis')?.value ?? '') || 0;
-  const ratio = Number.parseFloat($('ratioObjetivo')?.value ?? '') || 0;
-  const objetivo = dosis * ratio;
-  const contenedor = $('pesoObjetivo');
-  if (!contenedor) return;
-  contenedor.textContent = `🎯 Salida objetivo: ${Number.isFinite(objetivo) ? objetivo.toFixed(1) : '0.0'} g`;
-}
-
-function actualizarRatio() {
-  const ratio = Number.parseFloat($('ratioObjetivo')?.value ?? '') || 0;
-  const ratioValue = $('ratioValue');
-  if (ratioValue) ratioValue.textContent = `1:${ratio.toFixed(1)}`;
-  actualizarSalidaObjetivo();
-}
-
-function actualizarPreview() {
-  const dosis = Number.parseFloat($('dosis')?.value ?? '') || 0;
-  const taza = Number.parseFloat($('taza')?.value ?? '') || 0;
-  const tiempo = Number.parseFloat($('tiempo')?.value ?? '') || 0;
-  const ratioLive = $('ratioLive');
-  if (ratioLive) ratioLive.textContent = (dosis > 0 && taza > 0) ? `1:${(taza / dosis).toFixed(2)}` : '1:0';
-  const tiempoLive = $('tiempoLive');
-  if (tiempoLive) tiempoLive.textContent = `${tiempo.toFixed(1).replace(/\.0$/, '')}s`;
-  actualizarSalidaObjetivo();
-}
-
-function pintarNotas() {
-  const contenedor = $('notasSeleccionadas');
-  if (!contenedor) return;
-  contenedor.replaceChildren();
-
-  notasElegidas.forEach((nota) => {
-    const chip = document.createElement('button');
-    chip.type = 'button';
-    chip.className = 'chip chip-selected';
-    chip.textContent = `${nota} ✕`;
-    chip.setAttribute('aria-label', `Quitar nota ${nota}`);
-    chip.addEventListener('click', () => {
-      notasElegidas = notasElegidas.filter((item) => item !== nota);
-      pintarNotas();
-    });
-    contenedor.appendChild(chip);
-  });
-}
-
-function mostrarSugerencias() {
-  const buscador = $('buscarNota');
-  const contenedor = $('notasSugeridas');
-  if (!buscador || !contenedor) return;
-
-  const texto = buscador.value.trim().toLocaleLowerCase('es');
-  contenedor.replaceChildren();
-  if (texto.length < 2) return;
-
-  notasCafe
-    .filter((nota) => nota.toLocaleLowerCase('es').includes(texto) && !notasElegidas.includes(nota))
-    .slice(0, 10)
-    .forEach((nota) => {
-      const chip = document.createElement('button');
-      chip.type = 'button';
-      chip.className = 'chip';
-      chip.textContent = nota;
-      chip.addEventListener('click', () => {
-        if (notasElegidas.length >= 3) {
-          alert('Máximo 3 notas sensoriales');
-          return;
-        }
-        notasElegidas.push(nota);
-        buscador.value = '';
-        contenedor.replaceChildren();
-        pintarNotas();
-      });
-      contenedor.appendChild(chip);
-    });
-}
-
-function reproducirAlarma() {
-  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-  if (!AudioContextClass) return;
-
-  try {
-    audioContext = audioContext || new AudioContextClass();
-    if (audioContext.state === 'suspended') audioContext.resume();
-
-    [0, 0.28].forEach((retraso) => {
-      const oscilador = audioContext.createOscillator();
-      const volumen = audioContext.createGain();
-      const inicio = audioContext.currentTime + retraso;
-      oscilador.type = 'sine';
-      oscilador.frequency.setValueAtTime(880, inicio);
-      volumen.gain.setValueAtTime(0.0001, inicio);
-      volumen.gain.exponentialRampToValueAtTime(0.25, inicio + 0.02);
-      volumen.gain.exponentialRampToValueAtTime(0.0001, inicio + 0.2);
-      oscilador.connect(volumen);
-      volumen.connect(audioContext.destination);
-      oscilador.start(inicio);
-      oscilador.stop(inicio + 0.22);
-    });
-  } catch (error) {
-    console.warn('No se pudo reproducir la alarma sonora.', error);
-  }
-}
-
-function actualizarCronometro() {
-  const cronometro = $('cronometro');
-  if (!cronometro || !inicioCrono) return;
-
-  const segundos = (Date.now() - inicioCrono) / 1000;
-  cronometro.textContent = segundos.toFixed(1);
-
-  if (segundos >= 28 && !alarmaDisparada) {
-    alarmaDisparada = true;
-    cronometro.classList.add('alarm');
-    const mensaje = $('alarmaEstado');
-    if (mensaje) mensaje.textContent = '⏰ ¡Referencia: 28 segundos!';
-    reproducirAlarma();
-    if (navigator.vibrate) navigator.vibrate([180, 90, 180]);
-  }
-}
-
-function startCrono() {
-  if (corriendo) return;
-  corriendo = true;
-  alarmaDisparada = false;
-  inicioCrono = Date.now();
-  const cronometro = $('cronometro');
-  if (cronometro) {
-    cronometro.classList.add('running');
-    cronometro.classList.remove('alarm');
-  }
-  const mensaje = $('alarmaEstado');
-  if (mensaje) mensaje.textContent = '';
-
-  // Crear/reanudar el contexto desde el clic de START para permitir el sonido en el navegador.
-  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-  if (AudioContextClass) {
-    try {
-      audioContext = audioContext || new AudioContextClass();
-      if (audioContext.state === 'suspended') audioContext.resume();
-    } catch (error) {
-      console.warn('El audio no está disponible en este navegador.', error);
-    }
-  }
-
-  cronometroInterval = window.setInterval(actualizarCronometro, 50);
-}
-
-function stopCrono() {
-  if (!corriendo) return;
-  actualizarCronometro();
-  window.clearInterval(cronometroInterval);
-  cronometroInterval = null;
-  corriendo = false;
-  const cronometro = $('cronometro');
-  if (cronometro) cronometro.classList.remove('running');
-
-  const tiempo = ((Date.now() - inicioCrono) / 1000).toFixed(1);
-  const tiempoInput = $('tiempo');
-  if (tiempoInput) tiempoInput.value = tiempo;
-  actualizarPreview();
-}
-
-function resetCrono() {
-  window.clearInterval(cronometroInterval);
-  cronometroInterval = null;
-  corriendo = false;
-  inicioCrono = 0;
-  alarmaDisparada = false;
-  const cronometro = $('cronometro');
-  if (cronometro) {
-    cronometro.textContent = '00.0';
-    cronometro.classList.remove('running', 'alarm');
-  }
-  const mensaje = $('alarmaEstado');
-  if (mensaje) mensaje.textContent = '';
-}
-
-function obtenerHistorial() {
-  try {
-    const raw = localStorage.getItem('espresso_shots');
-    const parsed = raw ? JSON.parse(raw) : [];
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
-}
-
-function renderHistorial() {
-  const contenedor = $('historial');
-  if (!contenedor) return;
-
-  contenedor.replaceChildren();
-  const historial = obtenerHistorial();
-
-  if (!historial.length) {
-    contenedor.textContent = 'Todavía no hay extracciones guardadas.';
-    return;
-  }
-
-  historial.slice().reverse().forEach((shot) => {
-    if (!shot || typeof shot !== 'object') return;
-
-    const registro = document.createElement('article');
-    registro.className = 'registro';
-
-    const titulo = document.createElement('h3');
-    titulo.textContent = `${shot.cafe || 'Café sin nombre'} — 1:${String(shot.ratio ?? '0.00')}`;
-
-    const datos = document.createElement('p');
-    datos.textContent = `Dosis: ${shot.dosis ?? '—'} g · Bebida: ${shot.taza ?? '—'} g · Tiempo: ${shot.tiempo ?? '—'} s`;
-
-    const detalles = document.createElement('p');
-    detalles.textContent = `Temperatura: ${shot.temp ?? '—'} °C · Molienda: ${shot.molienda || '—'} · Sabor: ${shot.sabor || '—'}`;
-
-    registro.append(titulo, datos, detalles);
-
-    const notas = Array.isArray(shot.notas) ? shot.notas : [];
-    if (notas.length) {
-      const notasEl = document.createElement('p');
-      notasEl.textContent = `Notas: ${notas.join(', ')}`;
-      registro.appendChild(notasEl);
-    }
-
-    const fecha = document.createElement('small');
-    fecha.textContent = shot.fecha || 'Sin fecha';
-    registro.appendChild(fecha);
-
-    contenedor.appendChild(registro);
-  });
-}
-
-function registrar() {
-  const dosis = Number.parseFloat($('dosis')?.value ?? '') || 0;
-  const taza = Number.parseFloat($('taza')?.value ?? '') || 0;
-  const tiempo = Number.parseFloat($('tiempo')?.value ?? '') || 0;
-
-  if (!(dosis > 0) || !(taza > 0) || !(tiempo > 0)) {
-    alert('Completa dosis, bebida final y tiempo con valores mayores que cero.');
-    return;
-  }
-
-  const ratio = taza / dosis;
-  const estado = tiempo < 25 ? {clase:'warn', texto:'SUBEXTRACCIÓN', emoji:'🟠'} : tiempo > 32 ? {clase:'bad', texto:'SOBREEXTRACCIÓN', emoji:'🔴'} : {clase:'ok', texto:'PERFECTA', emoji:'✅'};
-
-  const estadoEl = $('estado');
-  if (estadoEl) {
-    estadoEl.className = `estado ${estado.clase}`;
-    estadoEl.textContent = `${estado.emoji} ${estado.texto} · Ratio 1:${ratio.toFixed(2)}`;
-  }
-
-  const estadoLive = $('estadoLive');
-  if (estadoLive) estadoLive.textContent = estado.texto.substring(0, 3);
-
-  const shot = {
-    cafe: ($('cafe')?.value ?? '').trim(),
-    dosis,
-    taza,
-    tiempo,
-    temp: $('temp')?.value ?? '',
-    molienda: ($('molienda')?.value ?? '').trim(),
-    sabor: $('sabor')?.value ?? 'Equilibrado',
-    notas: [...notasElegidas],
-    ratio: ratio.toFixed(2),
-    fecha: new Date().toLocaleString('es-ES')
-  };
-
-  const historial = obtenerHistorial();
-  historial.push(shot);
-
-  try {
-    localStorage.setItem('espresso_shots', JSON.stringify(historial));
-  } catch {
-    alert('No se pudo guardar el shot en este navegador.');
-    return;
-  }
-
-  renderHistorial();
-  notasElegidas = [];
-  pintarNotas();
-}
-
-$('ratioObjetivo')?.addEventListener('input', actualizarRatio);
-$('dosis')?.addEventListener('input', actualizarPreview);
-$('taza')?.addEventListener('input', actualizarPreview);
-$('tiempo')?.addEventListener('input', actualizarPreview);
-$('buscarNota')?.addEventListener('input', mostrarSugerencias);
-
-actualizarRatio();
-actualizarPreview();
-renderHistorial();
-pintarNotas();
+const notasCafe=['Chocolate Negro','Chocolate con Leche','Cacao','Brownie','Caramelo','Miel','Vainilla','Melaza','Azúcar Moreno','Avellana','Almendra','Nuez','Pistacho','Fresa','Frambuesa','Cereza','Arándano','Mora','Naranja','Mandarina','Limón','Lima','Pomelo','Bergamota','Piña','Mango','Papaya','Maracuyá','Coco','Melocotón','Albaricoque','Ciruela','Nectarina','Manzana','Pera','Uva','Jazmín','Rosa','Azahar','Lavanda','Té Negro','Té Verde','Menta','Hierba Fresca','Canela','Cardamomo','Clavo','Nuez Moscada','Pimienta','Tabaco','Madera','Tostado','Carbón','Vino Tinto','Ron','Whisky','Licor'];
+let notasElegidas=[], cronometroInterval=null, alarmaTimeout=null, inicioCrono=0, corriendo=false, alarmaDisparada=false, audioContext=null;
+const $=id=>document.getElementById(id);
+function actualizarSalidaObjetivo(){const dosis=parseFloat($('dosis').value)||0,ratio=parseFloat($('ratioObjetivo').value)||0;$('pesoObjetivo').textContent=`🎯 Salida objetivo: ${(dosis*ratio).toFixed(1)} g`;}
+function actualizarRatio(){const ratio=parseFloat($('ratioObjetivo').value)||0;$('ratioValue').textContent=`1:${ratio.toFixed(1)}`;actualizarSalidaObjetivo();}
+function actualizarPreview(){const dosis=parseFloat($('dosis').value)||0,taza=parseFloat($('taza').value)||0,tiempo=parseFloat($('tiempo').value)||0;$('ratioLive').textContent=dosis>0&&taza>0?`1:${(taza/dosis).toFixed(2)}`:'1:0';$('tiempoLive').textContent=`${tiempo.toFixed(1).replace(/\.0$/,'')}s`;actualizarSalidaObjetivo();}
+function pintarNotas(){const cont=$('notasSeleccionadas');cont.replaceChildren();notasElegidas.forEach(nota=>{const b=document.createElement('button');b.type='button';b.className='chip chip-selected';b.textContent=`${nota} ✕`;b.setAttribute('aria-label',`Quitar nota ${nota}`);b.onclick=()=>{notasElegidas=notasElegidas.filter(x=>x!==nota);pintarNotas();};cont.appendChild(b);});}
+function mostrarSugerencias(){const texto=$('buscarNota').value.trim().toLocaleLowerCase('es'),cont=$('notasSugeridas');cont.replaceChildren();if(texto.length<2)return;notasCafe.filter(n=>n.toLocaleLowerCase('es').includes(texto)&&!notasElegidas.includes(n)).slice(0,10).forEach(nota=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=nota;b.onclick=()=>{if(notasElegidas.length>=3){alert('Máximo 3 notas sensoriales');return;}notasElegidas.push(nota);$('buscarNota').value='';cont.replaceChildren();pintarNotas();};cont.appendChild(b);});}
+function sonarAlarma(){const AC=window.AudioContext||window.webkitAudioContext;if(!AC){alert('⏰ ¡28 segundos!');return;}try{audioContext=audioContext||new AC();audioContext.resume().then(()=>{[0,.32,.64].forEach(delay=>{const osc=audioContext.createOscillator(),gain=audioContext.createGain(),t=audioContext.currentTime+delay;osc.type='square';osc.frequency.setValueAtTime(880,t);gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(.3,t+.02);gain.gain.exponentialRampToValueAtTime(.0001,t+.24);osc.connect(gain);gain.connect(audioContext.destination);osc.start(t);osc.stop(t+.25);});}).catch(()=>alert('⏰ ¡28 segundos!'));}catch(e){alert('⏰ ¡28 segundos!');}}
+function dispararAlarma(){if(!corriendo||alarmaDisparada)return;alarmaDisparada=true;$('cronometro').classList.add('alarm');$('alarmaEstado').textContent='⏰ ¡28 SEGUNDOS!';sonarAlarma();if(navigator.vibrate)navigator.vibrate([250,100,250,100,250]);}
+function actualizarCronometro(){if(!corriendo)return;const s=(Date.now()-inicioCrono)/1000;$('cronometro').textContent=s.toFixed(1);if(s>=28)dispararAlarma();}
+function startCrono(){if(corriendo)return;corriendo=true;alarmaDisparada=false;inicioCrono=Date.now();$('cronometro').classList.add('running');$('cronometro').classList.remove('alarm');$('alarmaEstado').textContent='Alarma activada: sonará a los 28 s';const AC=window.AudioContext||window.webkitAudioContext;if(AC){try{audioContext=audioContext||new AC();audioContext.resume();}catch(e){}}cronometroInterval=window.setInterval(actualizarCronometro,50);alarmaTimeout=window.setTimeout(dispararAlarma,28000);}
+function stopCrono(){if(!corriendo)return;actualizarCronometro();clearInterval(cronometroInterval);clearTimeout(alarmaTimeout);cronometroInterval=alarmaTimeout=null;corriendo=false;$('cronometro').classList.remove('running');$('tiempo').value=((Date.now()-inicioCrono)/1000).toFixed(1);actualizarPreview();}
+function resetCrono(){clearInterval(cronometroInterval);clearTimeout(alarmaTimeout);cronometroInterval=alarmaTimeout=null;corriendo=false;alarmaDisparada=false;inicioCrono=0;$('cronometro').textContent='00.0';$('cronometro').classList.remove('running','alarm');$('alarmaEstado').textContent='Alarma de referencia: 28 s';}
+function obtenerHistorial(){try{const data=JSON.parse(localStorage.getItem('espresso_shots')||'[]');return Array.isArray(data)?data:[];}catch{return[];}}
+function renderHistorial(){const cont=$('historial'),hist=obtenerHistorial();cont.replaceChildren();if(!hist.length){cont.textContent='Todavía no hay extracciones guardadas.';return;}hist.slice().reverse().forEach(shot=>{if(!shot||typeof shot!=='object')return;const art=document.createElement('article');art.className='registro';const h=document.createElement('h3');h.textContent=`${shot.cafe||'Café sin nombre'} — 1:${shot.ratio??'0.00'}`;const p=document.createElement('p');p.textContent=`Dosis: ${shot.dosis??'—'} g · Bebida: ${shot.taza??'—'} g · Tiempo: ${shot.tiempo??'—'} s`;const d=document.createElement('p');d.textContent=`Temperatura: ${shot.temp??'—'} °C · Molienda: ${shot.molienda||'—'} · Sabor: ${shot.sabor||'—'}`;art.append(h,p,d);if(Array.isArray(shot.notas)&&shot.notas.length){const n=document.createElement('p');n.textContent=`Notas: ${shot.notas.join(', ')}`;art.appendChild(n);}const f=document.createElement('small');f.textContent=shot.fecha||'Sin fecha';art.appendChild(f);cont.appendChild(art);});}
+function registrar(){const dosis=parseFloat($('dosis').value),taza=parseFloat($('taza').value),tiempo=parseFloat($('tiempo').value);if(!(dosis>0)||!(taza>0)||!(tiempo>0)){alert('Completa dosis, bebida final y tiempo con valores mayores que cero.');return;}const ratio=taza/dosis,estado=tiempo<25?{clase:'warn',texto:'SUBEXTRACCIÓN',emoji:'🟠'}:tiempo>32?{clase:'bad',texto:'SOBREEXTRACCIÓN',emoji:'🔴'}:{clase:'ok',texto:'PERFECTA',emoji:'✅'};$('estado').className=`estado ${estado.clase}`;$('estado').textContent=`${estado.emoji} ${estado.texto} · Ratio 1:${ratio.toFixed(2)}`;$('estadoLive').textContent=estado.texto.substring(0,3);const hist=obtenerHistorial();hist.push({cafe:$('cafe').value.trim(),dosis,taza,tiempo,temp:$('temp').value,molienda:$('molienda').value.trim(),sabor:$('sabor').value,notas:[...notasElegidas],ratio:ratio.toFixed(2),fecha:new Date().toLocaleString('es-ES')});try{localStorage.setItem('espresso_shots',JSON.stringify(hist));}catch{alert('No se pudo guardar el shot en este navegador.');return;}renderHistorial();notasElegidas=[];pintarNotas();}
+$('ratioObjetivo').addEventListener('input',actualizarRatio);$('dosis').addEventListener('input',actualizarPreview);$('taza').addEventListener('input',actualizarPreview);$('tiempo').addEventListener('input',actualizarPreview);$('buscarNota').addEventListener('input',mostrarSugerencias);actualizarRatio();actualizarPreview();renderHistorial();pintarNotas();
 </script>
 </body>
 </html>
