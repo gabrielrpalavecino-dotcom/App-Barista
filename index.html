@@ -621,23 +621,6 @@ function mostrarSugerencias(){
 
     });
 
-}
-
-if(
-    nota1 &&
-    (nota1 === nota2 || nota1 === nota3)
-){
-    alert("La nota principal está repetida.");
-    return;
-}
-
-if(
-    nota2 &&
-    nota2 === nota3
-){
-    alert("La nota secundaria y el retrogusto no pueden ser iguales.");
-    return;
-}
     
     function cargarNotas(){
 
@@ -787,7 +770,7 @@ const notasCafe = [
     "1:" + ratio.toFixed(1);
 
     calcularSalidaObjetivo();
-        }
+        
     function calcularSalidaObjetivo(){
 
     const dosis =
@@ -877,123 +860,7 @@ function startCrono(){
     document
         .getElementById("cronometro")
         .classList.add("running");
-
-    cronometroInterval = setInterval(() => {
-
-        let segundos =
-            (Date.now() - inicio) / 1000;
-
-        /* ALERTA A LOS 28s */
-
-        if(segundos >= 28 && !aviso28s){
-
-            aviso28s = true;
-
-            alert("🎯 Objetivo alcanzado: 28 segundos");
-
-            if(navigator.vibrate){
-                navigator.vibrate(300);
-            }
-
-        }
-
-        document
-            .getElementById("cronometro")
-            .innerText =
-            segundos.toFixed(1);
-
-        /* BARRA DE PROGRESO (si existe) */
-
-        const barra =
-        document.getElementById("targetBar");
-
-        if(barra){
-
-            let progreso =
-            Math.min(
-                (segundos / 28) * 100,
-                100
-            );
-
-            barra.style.width =
-            progreso + "%";
-        }
-
-    },100);
-}
-
-function stopCrono(){
-
-    clearInterval(cronometroInterval);
-
-    corriendo = false;
-
-    document
-        .getElementById("cronometro")
-        .classList.remove("running");
-
-    let tiempoFinal =
-    parseFloat(
-        document
-        .getElementById("cronometro")
-        .innerText
-    );
-
-    const inputTiempo =
-    document.getElementById("tiempo");
-
-    if(inputTiempo){
-
-        inputTiempo.value =
-        tiempoFinal.toFixed(1);
-
-    }
-
-    if(typeof actualizarPreview === "function"){
-        actualizarPreview();
-    }
-}
-
-function resetCrono(){
-
-    clearInterval(cronometroInterval);
-
-    corriendo = false;
-    aviso28s = false;
-
-    document
-        .getElementById("cronometro")
-        .classList.remove("running");
-
-    document
-        .getElementById("cronometro")
-        .innerText = "00.0";
-
-    const barra =
-    document.getElementById("targetBar");
-
-    if(barra){
-        barra.style.width = "0%";
-    }
-}
     
- function actualizarPreview(){
-
-    let dosis =
-    parseFloat(
-    document.getElementById("dosis").value
-    ) || 0;
-
-    let ratioObjetivo =
-    parseFloat(
-    document.getElementById("ratioObjetivo").value
-    ) || 2;
-
-    if(dosis > 0){
-
-        let bebidaObjetivo =
-        (dosis * ratioObjetivo).toFixed(1);
-
         document.getElementById(
         "ratioLive"
         ).innerText =
