@@ -854,45 +854,129 @@ function actualizarPreview(){
     tiempo+"s";
 }
 
+nterval=setInterval(()=>{
+
+/* =========================
+   CRONÓMETRO ESPRESSO
+========================= */
+
+let cronometroInterval;
+let inicio;
+let corriendo = false;
+let aviso28s = false;
+
 function startCrono(){
 
     if(corriendo) return;
 
-    corriendo=true;
+    corriendo = true;
+    aviso28s = false;
 
-    inicio=Date.now();
+    inicio = Date.now();
 
     document
-    .getElementById("cronometro")
-    .classList.add("running");
+        .getElementById("cronometro")
+        .classList.add("running");
 
-    cronometroInterval=setInterval(()=>{
+    cronometroInterval = setInterval(() => {
 
-if(
-segundos >= 28 &&
-!aviso28s
-){
+        let segundos =
+            (Date.now() - inicio) / 1000;
 
-    aviso28s = true;
+        /* ALERTA A LOS 28s */
 
-    beep.play();
+        if(segundos >= 28 && !aviso28s){
 
-    navigator.vibrate?.(300);
+            aviso28s = true;
 
-}
-        
-        let segundos=
-        (Date.now()-inicio)/1000;
+            alert("🎯 Objetivo alcanzado: 28 segundos");
+
+            if(navigator.vibrate){
+                navigator.vibrate(300);
+            }
+
+        }
 
         document
-        .getElementById("cronometro")
-        .innerText=
-        segundos.toFixed(1);
+            .getElementById("cronometro")
+            .innerText =
+            segundos.toFixed(1);
+
+        /* BARRA DE PROGRESO (si existe) */
+
+        const barra =
+        document.getElementById("targetBar");
+
+        if(barra){
+
+            let progreso =
+            Math.min(
+                (segundos / 28) * 100,
+                100
+            );
+
+            barra.style.width =
+            progreso + "%";
+        }
 
     },100);
 }
-aviso28s = false;
 
+function stopCrono(){
+
+    clearInterval(cronometroInterval);
+
+    corriendo = false;
+
+    document
+        .getElementById("cronometro")
+        .classList.remove("running");
+
+    let tiempoFinal =
+    parseFloat(
+        document
+        .getElementById("cronometro")
+        .innerText
+    );
+
+    const inputTiempo =
+    document.getElementById("tiempo");
+
+    if(inputTiempo){
+
+        inputTiempo.value =
+        tiempoFinal.toFixed(1);
+
+    }
+
+    if(typeof actualizarPreview === "function"){
+        actualizarPreview();
+    }
+}
+
+function resetCrono(){
+
+    clearInterval(cronometroInterval);
+
+    corriendo = false;
+    aviso28s = false;
+
+    document
+        .getElementById("cronometro")
+        .classList.remove("running");
+
+    document
+        .getElementById("cronometro")
+        .innerText = "00.0";
+
+    const barra =
+    document.getElementById("targetBar");
+
+    if(barra){
+        barra.style.width = "0%";
+    }
+}
+    
  function actualizarPreview(){
 
     let dosis =
@@ -920,41 +1004,6 @@ aviso28s = false;
         ).placeholder =
         bebidaObjetivo + " g";
     }
-function stopCrono(){
-
-    clearInterval(cronometroInterval);
-
-    corriendo=false;
-
-    document
-    .getElementById("cronometro")
-    .classList.remove("running");
-
-    let tiempoFinal=parseFloat(
-    document.getElementById(
-    "cronometro").innerText);
-
-    document
-    .getElementById("tiempo")
-    .value=
-    tiempoFinal.toFixed(1);
-
-    actualizarPreview();
-}
-function resetCrono(){
-
-    clearInterval(cronometroInterval);
-
-    corriendo=false;
-
-    document
-    .getElementById("cronometro")
-    .classList.remove("running");
-
-    document
-    .getElementById("cronometro")
-    .innerText="00.0";
-}
 
 function registrar(){
 
